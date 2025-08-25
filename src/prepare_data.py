@@ -31,9 +31,12 @@ def remove_correlated_features(
 
     features_to_drop = []
     for i in range(NB_FEATURES):
-        for j in range(i + 1, NB_FEATURES):
+        for j in range(NB_FEATURES):
+            # We could have used range(i + 1, NB_FEATURES) but since we need to keep some features through
+            # `features_to_keep`, we loop over all features to be sure to filter them properly
             if (
-                corr.iloc[i, j] >= threshold
+                i != j
+                and corr.iloc[i, j] >= threshold
                 and FEATURE_NAMES[j] not in features_to_keep
                 and FEATURE_NAMES[j] not in features_to_drop
             ):
