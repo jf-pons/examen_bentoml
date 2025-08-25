@@ -7,3 +7,4 @@ wget-log
 *.pyc
 .vscode
 models
+bento_image.tar

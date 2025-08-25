@@ -1,0 +1,14 @@
+service: "src.service:StudentAdmissionService"
+labels:
+  owner: "Jeff"
+  project:
+    description: "Predict the chance of admission of a student in a university"
+  version: 1.0.0
+include:
+  - 'src/*.py'
+  - "models/scaler.joblib"
+python:
+    packages:
+      - scikit-learn
+      - pandas
+      - pyjwt

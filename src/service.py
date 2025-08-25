@@ -46,7 +46,7 @@ class InputModel(BaseModel):
         ).to_numpy()
 
 
-@bentoml.service(name="student_admission")
+@bentoml.service(name="pons_student_admission")
 class StudentAdmissionService:
     _model = bentoml.models.BentoModel(MODEL_TAG)
 
