@@ -13,4 +13,7 @@ setup:
 clean_data:
 	python src/prepare_data.py
 
+train_model:
+	python src/train_model.py
+
 all: setup get_data 
