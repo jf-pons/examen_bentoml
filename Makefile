@@ -16,4 +16,13 @@ clean_data:
 train_model:
 	python src/train_model.py
 
-all: setup get_data 
+all: setup get_data clean_data train_model
+
+clean:
+	rm -f data/raw/admission.csv && \
+	rm -f data/processed/X_train.csv && \
+	rm -f data/processed/X_test.csv && \
+	rm -f data/processed/y_train.csv && \
+	rm -f data/processed/y_test.csv && \
+	bentoml models delete student_admission -y
+
