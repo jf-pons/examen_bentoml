@@ -2,10 +2,9 @@ import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import joblib
 
-DATA_PATH = os.path.join("data")
-RAW_DATA_PATH = os.path.join(DATA_PATH, "raw", "admission.csv")
-PROCESSED_DATA_DIR = os.path.join(DATA_PATH, "processed")
+from src.constants import PROCESSED_DATA_DIR, RAW_DATA_PATH, SCALER_PATH
 
 
 def load_data(file_path: str):
@@ -52,10 +51,14 @@ def split_data(features: pd.DataFrame, target: pd.Series, test_size: float):
     return train_test_split(features, target, test_size=test_size)
 
 
-def normalize_features(X_train: pd.DataFrame, X_test: pd.DataFrame):
+def normalize_features(X_train: pd.DataFrame, X_test: pd.DataFrame, scaler_path: str):
     scaler = StandardScaler()
     X_train = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns)
     X_test = pd.DataFrame(scaler.transform(X_test), columns=X_test.columns)
+
+    print(f"Storing scaler in {scaler_path}")
+    joblib.dump(scaler, scaler_path)
+
     return X_train, X_test
 
 
@@ -87,7 +90,10 @@ def main(
         features=features, target=target, test_size=test_size
     )
 
-    X_train, X_test = normalize_features(X_train=X_train, X_test=X_test)
+    X_train, X_test = normalize_features(
+        X_train=X_train, X_test=X_test, scaler_path=SCALER_PATH
+    )
+
     store_data(X_train=X_train, X_test=X_test, y_train=y_train, y_test=y_test)
 
 

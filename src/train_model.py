@@ -4,8 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import root_mean_squared_error
 import bentoml
 
-PROCESSED_DATA_DIR = os.path.join("data", "processed")
-MODEL_NAME = "student_admission"
+from src.constants import PROCESSED_DATA_DIR, MODEL_NAME
 
 
 def load_data(dir_path: str):

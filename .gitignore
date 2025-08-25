@@ -4,3 +4,6 @@
 /clean_data.csv
 wget-log
 /data
+*.pyc
+.vscode
+models
